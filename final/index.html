@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebSockets - Simple chat</title>
+        <link rel="stylesheet" href="app.css">
+    </head>
+    <body id="app">
+        <div id="content" rv-show="username" rv-scroll-bottom="messages | void username">
+            <p rv-if="error">{ error }</p>
+            <chat-messages></chat-messages>
+            <!--p rv-each-msg="messages"><span rv-style="msg.color | color">{ msg.user }</span> @ <span rv-from-now="msg.time"></span>: <span rv-html="msg.text | toHTML"></span></p-->
+        </div>
+        <div id="radarChart">
+            <canvas rv-radar-chart="wordOccurrences < messages"></canvas>
+        </div>
+        <div id="input" rv-hide="error">
+            <span id="status" rv-style="usercolor | color">{ status }{ username }: </span>
+            <input type="text" rv-focus="messages | void status" rv-disabled="connected | not" rv-value="message" rv-on-enter-key-press="sendMessage">
+        </div>
+
+        <script src="./jquery.min.js"></script>
+        <script src="./moment.min.js"></script>
+        <script src="./Chart.Core.js"></script>
+        <script src="./Chart.Radar.js"></script>
+        <script src="./rivets.bundled.min.js"></script>
+        <script src="./app.js"></script>
+    </body>
+</html>
